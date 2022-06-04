@@ -1,4 +1,4 @@
-# CodeWars Challenges:  <a href="https://www.codewars.com/users/MDude">**Visit Here** </a>
+# CodeWars Challenges:  <a href="https://www.codewars.com/users/MDuude">**Visit Here** </a>
 
 ![Codewars profile stats](https://github.com/MahmoudDawood/codewars/blob/master/Capture.PNG)
 A repository filled with codewars challenges where I push 7 solutions per week.. Will be updated once I reach 2 kyu.
