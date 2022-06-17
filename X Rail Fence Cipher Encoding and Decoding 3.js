@@ -1,37 +1,41 @@
 function encodeRailFenceCipher(string, numberRails) {
   if(!string) return ""
   // declare empty answer string, index of char, 1st skip = (n-2)*2+1, 2nd skip = -1
-  let result = "", idx = 0, skip1 = (numberRails-2)*2+1, skip2 = -1, temp = ""
-  // console.log(string.length)
+  let result = "", idx = 0, skip1 = (numberRails-2)*2+1, skip2 = -1, temp = "", flag = true
+  console.log(string.length)
   
   // loop over rails as long as answer string length != given string length
   for(let i = 0; i < numberRails; i++){
     // char index = loop count
     idx = i
-
+    flag = true
     // append char at index to result
     result += string[idx]
     // while index < given string length
     while(idx < string.length){
       
+      if(i === 0) flag = true
       // if index + 1st skip < string length && 1st skip > 0
-      if(idx + skip1 + 1 < string.length && skip1 > 0){
+      if(flag && idx + skip1 + 1 < string.length && skip1 > 0){
         // index += 1st skip + 1 & append char at index
         idx += skip1 + 1
         result += string[idx]
+        flag = false
       }
 
+      if(i === numberRails - 1) flag = false
       // if index + 2nd skip < string length && loop > 0 (not first loop)
-      if(idx + skip2 + 1 < string.length && i > 0){
+      if(!flag && idx + skip2 + 1 < string.length && i > 0){
         // index += 2nd skip + 1 & append char at index
         idx += skip2 + 1
         result += string[idx]
+        flag = true
       }
 
       // if result didn't change, break to next loop
-      if(temp === result) break
+      if(result === temp) break
       temp = result
-      // console.log(result, idx)
+      console.log(result, idx)
 
     }
     // 1st skip -= 2, 2nd skip += 2
@@ -44,7 +48,18 @@ function encodeRailFenceCipher(string, numberRails) {
 
 // console.log(encodeRailFenceCipher("WEAREDISCOVEREDFLEEATONCE", 3)) // "WECRLTEERDSOEEFEAOCAIVDEN");
 // console.log(encodeRailFenceCipher("Hello, World!", 3)) // "Hoo!el,Wrdl l"
-// console.log(encodeRailFenceCipher("DTSWENEIERARCOAEEFCEVODEL", 3)) // "Hoo!el,Wrdl l"
+console.log(encodeRailFenceCipher("ei usen ert  acfmos ntaiesjtarg!oeiptsneknpd  Piv aud ueia.ua roitii ilon  na lmnVpatxoca uett tdte!iuiaueifdeeis tu ,io eas! fsiarmtmrmiessaiete rorAcfmsetiqeteosDeliep u anxii oaprisuvmov es un ue ra d eni mr rroriis b   ceqriueeit p   itm ,c", 49)) // "Hoo!el,Wrdl l"
+
+// H   o   o   !
+//  e l , W r d
+//   l  ''   l
+
+// W     I     R     E     E
+//  E   D S   E E   E A   C
+//   A E   C V   D L   T N
+//    R     O     F     O
+// WIREEEDSEEEACAECVDLTNEROFO
+// WIREEEDSEEEACAECVDLTNROFO
 
 // Parameters: String, number of rails
 // Returns: Encoded string
@@ -67,11 +82,12 @@ function encodeRailFenceCipher(string, numberRails) {
     // 1st skip -= 2, 2nd skip += 2
   // return result string
 
-'WIREEEDSEEEACAECVDLTNEROFO'
-'WIREEEDSEEEACAECVDLTNROFO'
+// 'WIREEEDSEEEACAECVDLTNEROFO'
+// 'WIREEEDSEEEACAECVDLTNROFO'
+
 function decodeRailFenceCipher(string, numberRails) {
   if(!string) return ""
-  let result = "", idx = 0, skip1 = (numberRails-2)*2+1, skip2 = -1, temp = ""
+  let result = "", idx = 0, skip1 = (numberRails-2)*2+1, skip2 = -1, temp = "", flag = true
   let cnt = 0, copy = string.split(''), arr = []
   // console.log(string.length)
   
@@ -81,6 +97,7 @@ function decodeRailFenceCipher(string, numberRails) {
   // while result string length != encoded string length
     // append first char in each array going down and up
   // return result string
+
   for(let i = 0; i < numberRails; i++){
     // char index = loop count
     idx = i
@@ -90,22 +107,27 @@ function decodeRailFenceCipher(string, numberRails) {
     result += string[idx]
     // while index < given string length
     cnt = 1
+    cnt = string.length > Math.min(skip1, skip2) + idx ? 1 : 0
     while(idx < string.length){
       
+      if(i === 0) flag = true
       // if index + 1st skip < string length && 1st skip > 0
-      if(idx + skip1 + 1 < string.length && skip1 > 0){
+      if(flag && idx + skip1 + 1 < string.length && skip1 > 0){
         // index += 1st skip + 1 & append char at index
         idx += skip1 + 1
         result += string[idx]
         cnt++
+        flag = false
       }
 
+      if(i === numberRails - 1) flag = false
       // if index + 2nd skip < string length && loop > 0 (not first loop)
-      if(idx + skip2 + 1 < string.length && i > 0){
+      if(!flag && idx + skip2 + 1 < string.length && i > 0){
         // index += 2nd skip + 1 & append char at index
         idx += skip2 + 1
         result += string[idx]
         cnt++
+        flag = true
       }
 
       // if result didn't change, break to next loop
@@ -141,8 +163,12 @@ function decodeRailFenceCipher(string, numberRails) {
   return result
 }
 
+// WECRLTEERDSOEEFEAOCAIVDEN
+// Hoo!el,Wrdl l
+
+// console.log(decodeRailFenceCipher("WIREEEDSEEEACAECVDLTNROFO", 4)) // "WEAREDISCOVEREDFLEEATONCE");
 // console.log(decodeRailFenceCipher("WECRLTEERDSOEEFEAOCAIVDEN", 3)) // "WEAREDISCOVEREDFLEEATONCE");
-console.log(decodeRailFenceCipher("WECRLTEERDSOEEFEAOCAIVDEN", 3)) // "WEAREDISCOVEREDFLEEATONCE");
+// console.log(decodeRailFenceCipher("Hoo!el,Wrdl l", 3)) // "WEAREDISCOVEREDFLEEATONCE");
 
 // Parameters: Encoded string, number of levels
 // Returns: Original string
