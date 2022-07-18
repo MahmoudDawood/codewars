@@ -4,10 +4,13 @@ function resolver(guess, solution){
   const check = new Array(5)
   for(let i = 0; i < 5; i++) mark[i] = 'b'
   // Iterate over guess strings
-  // if guess letter is present in solution at same location >> mark = g && mark[sol idx] = -
-  for(let i = 0; i < 5; i++) if(guess[i] == solution[i]) mark[i] = 'g'
-    
-  
+  for(let i = 0; i < 5; i++){ 
+    // if guess letter is present in solution at same location >> mark = g && mark[sol idx] = -
+    if(guess[i] == solution[i]){
+      mark[i] = 'g'
+      check[i] = true
+    }
+  }
   for(let i = 0; i < 5; i++){ 
     // else if guess letter is present in solution with mark 'b' >> mark = y && mark[sol idx] = -
     if(solution.split('').includes(guess[i])){
