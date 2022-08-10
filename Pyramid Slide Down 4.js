@@ -1,28 +1,36 @@
 function longestSlideDown (pyramid) {
   // create a back tracking function with params (sum, level)
   // break condition at level = last pyramid level, choose max of previous or current sum 
-  let max = 0
-  function calculate(i, sum, level) {
-    // end condition
-    if(level == pyramid.length - 1) {
-      max = Math.max(sum + pyramid[level][i], max)
-      return
-    }
+  // let max = 0
+  // function calculate(i, sum, level) {
+  //   // end condition
+  //   if(level == pyramid.length - 1) {
+  //     max = Math.max(sum + pyramid[level][i], max)
+  //     return
+  //   }
 
-    // left branch
-    calculate(i, sum + pyramid[level][i], level + 1)
+  //   // left branch
+  //   calculate(i, sum + pyramid[level][i], level + 1)
 
-    // right branch
-    calculate(i + 1, sum + pyramid[level][i], level + 1)
-  }
-  calculate(0, 0, 0)
-  return max
+  //   // right branch
+  //   calculate(i + 1, sum + pyramid[level][i], level + 1)
+  // }
+  // calculate(0, 0, 0)
+  // return max
+
+  // console.log(pyramid.length - 2)
+  for(let i = pyramid.length - 2; i >= 0; i--)
+    for(let j = 0; j < pyramid[i].length; j++)
+      pyramid[i][j] += Math.max(pyramid[i + 1][j], pyramid[i + 1][j + 1])
+  return pyramid[0][0]
 }
-console.log(longestSlideDown([[3],
+console.log(longestSlideDown(
+  [[3],
     [7, 4],
     [2, 4, 6],
     [8, 5, 9, 3]]))
-console.log(longestSlideDown([[75],
+console.log(longestSlideDown(
+  [[75],
     [95, 64],
     [17, 47, 82],
     [18, 35, 87, 10],
