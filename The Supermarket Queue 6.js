@@ -1,24 +1,13 @@
-function queueTime(arr, n) {
-  /*
-  Make array of tills starting at nulls
-  allocate first arr client in queue to each till
-  if array is empty return time
-  find minimum client on till and subtract it's value from all tills, add it to time, add another client
-*/
+function queueTime(customers, n) {
   let time = 0, tills = Array(n).fill(null)
-  while(arr.length){
-    // subtract lest time from first n clients in queue
+  while(customers.length){
     let min = 1e9
-    for(let i = 0; i < n && i < arr.length; i++){
-      min = Math.min(arr[i], min)
-    }
-    for(let i = 0; i < n && i < arr.length; i++){
-      arr[i] -= min
-    }
-    // console.log(min)
+    for(let i = 0; i < n && i < customers.length; i++) min = Math.min(customers[i], min)
+    
+    for(let i = 0; i < n && i < customers.length; i++) customers[i] -= min
+    
     time += min
-
-    arr = arr.filter(x => x != 0)
+    customers = customers.filter(x => x != 0)
   }
   return time
 }
