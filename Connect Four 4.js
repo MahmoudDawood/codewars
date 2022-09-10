@@ -1,35 +1,35 @@
-function whoIsWinner(arr) {
+function whoIsWinner(piecesPositionList) {
   const backwardDiagonal = (col, row, move) => {
-    let start = 0
-    while(row - start > 0 && col - start > 0) start++
-
+    while(row > 0 && col > 0) {
+      col--
+      row--
+    }
     let cnt = 0, max = 0
-    for(let i = start; col - i <= 6 && row - i <= 5; i--){
-      if(board[col - i][row - i] == move) cnt++
+    while(row <= 5 && col <= 6){
+      if(board[col++][row++] == move) cnt++
       else cnt = 0
       max = Math.max(max, cnt)
     }
-    if(max == 4) return true
+    if(max >= 4) return true
     return false
   }
 
   const forwardDiagonal = (col, row, move) => {
-    let start = 0
-    while(row - start > 0 && col + start < 6) start++
-
+    while(row > 0 && col < 6) {
+      col++
+      row--
+    }
     let cnt = 0, max = 0
-    console.log({col, row, start})
-    for(let i = start; col - i >= 0 && row + i <= 5; i--){
-      console.log(col-i, row+i)
-      if(board[col - i][row + i] == move) cnt++
+    while(row <= 5 && col >= 0){
+      if(board[col--][row++] == move) cnt++
       else cnt = 0
       max = Math.max(max, cnt)
     }
-    if(max == 4) return true
+    if(max >= 4) return true
     return false
   }
 
-  const moves = arr.map(x => x.split('_'))
+  const moves = piecesPositionList.map(x => x.split('_'))
   
   // Make a board 2d array of 7 columns each of 6 rows & fill them with nulls
   const board = Array(7).fill(null).map(x => Array(6).fill(null))
@@ -51,7 +51,7 @@ function whoIsWinner(arr) {
       else cnt = 0
       max = Math.max(max, cnt)
     }
-    if(max == 4) return move[1]
+    if(max >= 4) return move[1]
 
     // Check row
     start = column - 3 > 0 ? column - 3 : 0
@@ -62,7 +62,7 @@ function whoIsWinner(arr) {
       else cnt = 0
       max = Math.max(max, cnt)
     }
-    if(max == 4) return move[1]
+    if(max >= 4) return move[1]
 
     // Check diagonal
     if(backwardDiagonal(column, row, move[1])) return move[1]
@@ -74,28 +74,48 @@ function whoIsWinner(arr) {
 
 }
 
-console.log(whoIsWinner([ "A_Red",
-                "B_Yellow",
-                "A_Red",
-                "E_Yellow",
-                "A_Red",
-                "G_Yellow", "A_Red"]), "Red");
-console.log(whoIsWinner([ "A_Red",
-"B_Yellow",
-"A_Red",
-"C_Yellow",
-"A_Red",
-"D_Yellow", "D_Red", "E_Yellow"]), "Yellow");
-console.log(whoIsWinner([ "A_Red",
-                "B_Yellow",
-                "A_Red",
-                "E_Yellow",
-                "F_Red",
-                "G_Yellow"]), "Draw");
+console.log(whoIsWinner([ 'B_Red',
+  'E_Yellow',
+  'F_Red',
+  'E_Yellow',
+  'B_Red',
+  'F_Yellow',
+  'C_Red',
+  'A_Yellow',
+  'B_Red',
+  'E_Yellow',
+  'E_Red',
+  'C_Yellow',
+  'G_Red',
+  'D_Yellow',
+  'F_Red',
+  'G_Yellow',
+  'E_Red',
+  'D_Yellow',
+  'F_Red',
+  'E_Yellow' ]), "Yellow");
+// console.log(whoIsWinner([ "A_Red",
+//                 "B_Yellow",
+//                 "A_Red",
+//                 "E_Yellow",
+//                 "A_Red",
+//                 "G_Yellow", "A_Red"]), "Red");
+// console.log(whoIsWinner([ "A_Red",
+// "B_Yellow",
+// "A_Red",
+// "C_Yellow",
+// "A_Red",
+// "D_Yellow", "D_Red", "E_Yellow"]), "Yellow");
+// console.log(whoIsWinner([ "A_Red",
+//                 "B_Yellow",
+//                 "A_Red",
+//                 "E_Yellow",
+//                 "F_Red",
+//                 "G_Yellow"]), "Draw");
 
-// Parameters: List of moves in a connect 4 game, column_color
-// Returns: The winner color or draw
-// Examples:
+// // Parameters: List of moves in a connect 4 game, column_color
+// // Returns: The winner color or draw
+// // Examples:
 // console.log(whoIsWinner([ "A_Red",
 //                 "B_Yellow",
 //                 "A_Red",
