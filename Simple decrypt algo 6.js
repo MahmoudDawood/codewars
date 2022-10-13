@@ -1,12 +1,9 @@
 function decrypt(encryption){
-    const letters = Array(26).fill(0)
     return encryption.split('').reduce((acc, curr) => {
-        if(curr.toLowerCase() != curr.toUpperCase() && curr == curr.toLowerCase()){
+        if(curr.toLowerCase() != curr.toUpperCase() && curr == curr.toLowerCase())
             acc[curr.charCodeAt(0) - 97]++
-        }
         return acc
     }, Array(26).fill(0)).join('')
-    // return letters.join('')
 }
 console.log(decrypt('$aaaa#bbb*cc^fff!z'))
 console.log(decrypt('z$aaa#ccc%eee1234567890'))
