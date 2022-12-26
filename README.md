@@ -1,7 +1,7 @@
 # CodeWars Challenges:  <a href="https://www.codewars.com/users/MDuude">**Visit Here** </a>
 
-![Codewars profile stats](https://github.com/MahmoudDawood/codewars/blob/master/Capture.PNG)
-A repository filled with codewars challenges where I push 7 solutions per week.. Will be updated once I reach 2 kyu.
+![Codewars profile stats](https://github.com/MahmoudDawood/codewars/blob/master/new.PNG)
+A repository filled with codewars challenges where I push 7 solutions per week.
 
 ## How It's Made:
 
@@ -16,4 +16,4 @@ I consistently refactor and optimize my code, sometimes for efficiency, sometime
 ## Lessons Learned:
 
 Can't solve a problem? we'll get alot of those, the only thing to worry about is trying the best we could and trust the process.
-....can't solve it yet.. just give and quit maaan!
+....can't solve it yet.. just give up and quit maaan!
